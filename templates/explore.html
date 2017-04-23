@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
+<!--<style>
 .dropbtn {
     background-color: #4CAF50;
     color: white;
@@ -49,19 +49,24 @@
 .dropdown a:hover {background-color: #ddd}
 
 .show {display:block;}
-</style>
+</style>-->
 </head>
 <body>
 
 <h2>Search/Filter Dropdown</h2>
 <p>Click on the button to open the dropdown menu, and use the input field to search for a specific dropdown link.</p>
 
+<div class="depts">
+  <div id="depts" class="dropdown-content">
+  </div>
+</div>
+
 <div class="drop">
   <div id="drop" class="dropdown-content">
   </div>
 </div>
 
-<div class="dropdown">
+<!--<div class="dropdown">
 <button onclick="addSelect()" class="dropbtn">Dropdown</button>
   <div id="myDropdown" class="dropdown-content">
     <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
@@ -73,12 +78,13 @@
     <a href="#support">Support</a>
     <a href="#tools">Tools</a>
   </div>
-</div>
+</div>-->
 
-<div class="depts">
-  <div id="depts" class="dropdown-content">
+<div class="tutor">
+  <div id="tutor" class="dropdown-content">
   </div>
 </div>
+
 
 <script>
 /* When the user clicks on the button,
@@ -99,7 +105,8 @@ function addSelect(n) {
    var newDiv=document.createElement('div');
    var json_obj = JSON.parse(Get('./courses?deptid="' + n + '"'));
    console.log(json_obj);
-   var html = '<select>';
+   var html = '<select onchange="loadtutor(this.options[this.selectedIndex].value,' + n + ');">';
+   html += '<option disabled selected value> -- select an option -- </option>';
    for(i = 0;i < json_obj.length;i++){
   html += '<option value='+json_obj[i][0]+'>'+json_obj[i][1]+'</option>';
   }
@@ -114,11 +121,33 @@ function addSelect(n) {
    document.getElementById("drop").classList.add("show");
 }
 
+function loadtutor(cid, dept_id) {
+   //console.log(n);
+   var newDiv=document.createElement('div');
+   var json_obj = JSON.parse(Get('./availabletutors?cid="' + cid + '"&dept_id="' + dept_id + '"'));
+   console.log(json_obj);
+   var html = '<select>';
+   html += '<option disabled selected value> -- select an option -- </option>';
+   for(i = 0;i < json_obj.length;i++){
+  html += '<option value='+json_obj[i][0]+'>'+json_obj[i][0]+ " " + json_obj[i][2] + ":" + json_obj[i][1] +'</option>';
+  }
+   /*for(i = 0; i < dates.length; i++) {
+       html += "<option value='"+dates[i]+"'>"+dates[i]+"</option>";
+   }*/
+   html += '</select>';
+   newDiv.innerHTML= html;
+   document.getElementById("tutor").innerHTML = "";
+   document.getElementById("tutor").appendChild(newDiv);
+   //document.getElementById("drop").classList.toggle("show");
+   document.getElementById("tutor").classList.add("show");
+}
+
 function getDepts() {
    var newDiv=document.createElement('div');
    var json_obj = JSON.parse(Get('./departments'));
    console.log(json_obj);
    var html = '<select onchange="addSelect(this.options[this.selectedIndex].value);">';
+   html += '<option disabled selected value> -- select an option -- </option>';
    for(i = 0;i < json_obj.length;i++){
   html += '<option value='+json_obj[i][0]+'>'+ json_obj[i][0] + ' '+ json_obj[i][1]+'</option>';
   }
