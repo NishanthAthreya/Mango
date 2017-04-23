@@ -1,9 +1,11 @@
 import os
 from flask import Flask, render_template, request, url_for, send_from_directory
 import pymysql.cursors
+from flask_login import LoginManager, login_required, UserMixin
 
+login_manager = LoginManager()
 app = Flask(__name__)
-
+login_manager.init_app(app)
 hackru_pass = os.environ['HACKRU_PASS']
 
 connection = pymysql.connect(host='mangodb.c3all2cpsbip.us-east-1.rds.amazonaws.com',
@@ -11,6 +13,17 @@ connection = pymysql.connect(host='mangodb.c3all2cpsbip.us-east-1.rds.amazonaws.
                              password=hackru_pass,
                              db='mangodb')
 
+class User(UserMixin):
+    pass
+
+@login_manager.user_loader
+def user_loader(email):
+    if email not in users:
+        return
+
+    user = User()
+    user.id = email
+    return user
 
 @app.route('/')
 def home():
