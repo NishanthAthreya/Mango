@@ -1,7 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
 
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+#myInput {
+    border-box: box-sizing;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd}
+
+.show {display:block;}
+</style>
 </head>
 <body>
 
@@ -9,7 +57,7 @@
 <p>Click on the button to open the dropdown menu, and use the input field to search for a specific dropdown link.</p>
 
 <div class="drop">
-	<div id="drop" class="dropdown-content">
+  <div id="drop" class="dropdown-content">
   </div>
 </div>
 
@@ -28,11 +76,81 @@
 </div>
 
 <div class="depts">
-	<div id="depts" class="dropdown-content">
+  <div id="depts" class="dropdown-content">
   </div>
 </div>
 
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  //addSelect('dropdown')
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+function Get(yourUrl){
+    var Httpreq = new XMLHttpRequest(); // a new request
+    Httpreq.open("GET",yourUrl,false);
+    Httpreq.send(null);
+    return Httpreq.responseText;          
+}
+
+function addSelect(n) {
+   console.log(n);
+   var newDiv=document.createElement('div');
+   var json_obj = JSON.parse(Get('./courses?deptid="' + n + '"'));
+   console.log(json_obj);
+   var html = '<select>';
+   for(i = 0;i < json_obj.length;i++){
+  html += '<option value='+json_obj[i][0]+'>'+json_obj[i][1]+'</option>';
+  }
+   /*for(i = 0; i < dates.length; i++) {
+       html += "<option value='"+dates[i]+"'>"+dates[i]+"</option>";
+   }*/
+   html += '</select>';
+   newDiv.innerHTML= html;
+   document.getElementById("drop").innerHTML = "";
+   document.getElementById("drop").appendChild(newDiv);
+   //document.getElementById("drop").classList.toggle("show");
+   document.getElementById("drop").classList.add("show");
+}
+
+function getDepts() {
+   var newDiv=document.createElement('div');
+   var json_obj = JSON.parse(Get('./departments'));
+   console.log(json_obj);
+   var html = '<select onchange="addSelect(this.options[this.selectedIndex].value);">';
+   for(i = 0;i < json_obj.length;i++){
+  html += '<option value='+json_obj[i][0]+'>'+ json_obj[i][0] + ' '+ json_obj[i][1]+'</option>';
+  }
+   /*for(i = 0; i < dates.length; i++) {
+       html += "<option value='"+dates[i]+"'>"+dates[i]+"</option>";
+   }*/
+   html += '</select>';
+   newDiv.innerHTML= html;
+   document.getElementById("depts").appendChild(newDiv);
+   document.getElementById("depts").classList.toggle("show");
+}
+
+
+window.onload = getDepts;
+
+function filterFunction() {
+  addSelect("dropdown");
+    var input, filter, ul, li, a, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    div = document.getElementById("myDropdown");
+    a = div.getElementsByTagName("a");
+    for (i = 0; i < a.length; i++) {
+        if (a[i].innerHTML.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+}
+
+</script>
 
 </body>
 </html>
-
