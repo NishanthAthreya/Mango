@@ -110,33 +110,38 @@ update pictures in team cards
 	<div class="container-fluid" style="background-color:white;" id="content-area">
 		
 		<div class="row" id="content-area-headings">
-			<div class="col-xs-6" id="learning-heading"style="background-color:white;"><h3>Courses I'm getting help with</h3></div> 
-			<div class="col-xs-6" style="background-color:white;"id="teaching-heading"><h3>Courses I'm helping others with</h3></div>
+			<div class="col-xs-6" id="learning-heading"style="background-color:white;"><h3 class="text-center">Courses I'm getting help with</h3></div> 
+			<div class="col-xs-6" style="background-color:white;"id="teaching-heading"><h3 class="text-center">Courses I'm helping others with</h3></div>
 		</div>
 		
 		<div class="row" style="min-height:400px;">
-			<div class="col-xs-6" id="courses-learning"style="background-color:LightGray;">
+			<div class="col-xs-6" id="courses-learning"style="background-color:DarkGray; padding-top:10px;">
 				
 				<!-- delete this-->
-				<p>to be inserted from template</p>
+				<!--<p>to be inserted from template</p>-->
+
 
 				{% for item in learning_list %}
+				<div class="course-item">
 					<p>Course name: {{item[2]}} </p>
 					<p>Tutor: {{item[0]}} </p>
 					<p>Tutor's email: {{item[1]}} </p>
+				</div>
 				{% endfor %}	
 				
 				
 			</div> 
-			<div class="col-xs-6" style="background-color:LightGray;"id="courses-teaching">
+			<div class="col-xs-6" style="background-color:DarkGray;padding-top:10px;"id="courses-teaching">
 
 				<!--delete this -->
-				<p>to be inserted from template</p>
+				<!--<p>to be inserted from template</p>-->
 
 				{% for item in teaching_list %}
+				<div class="course-item">
 					<p>Course name: {{item[2]}} </p>
 					<p>Student: {{item[0]}} </p>
 					<p>Student's email: {{item[1]}} </p>
+				</div>
 				{% endfor %}
 
 			</div>
