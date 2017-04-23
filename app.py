@@ -142,6 +142,11 @@ def connect():
     connection.commit()
     return render_template('index.html')
 
+@app.route('/courses', methods=['GET'])
+def get_courses():
+    dept_id = request.args.get('deptid')
+    print(dept_id)
+
 @app.route('/protected')
 @login_required
 def testing():

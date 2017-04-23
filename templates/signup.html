@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="../static/css/signup_styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+      <div class="demo-ribbon"></div>
+      <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+            <h2>Sign Up For Mango</h2>
+            <form role="form" action="create" method="POST">
+				<div class="mdl-textfield mdl-js-textfield" style="margin: 0 auto;">
+					<input class="mdl-textfield__input" type="first-name" id="first-name" required autofocus/>
+					<label class="mdl-textfield__label" for="first-name">First Name</label>
+				</div><br/>
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" type="last-name" id="last-name" required/>
+					<label class="mdl-textfield__label" for="last-name">Last Name</label>
+				</div><br/>
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" type="email" id="email" required/>
+					<label class="mdl-textfield__label" for="email">Email</label>
+				</div><br/>
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" type="phone-number" id="phone-number" required/>
+					<label class="mdl-textfield__label" for="phone-number">Phone Number</label>
+				</div><br/>
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" type="major" id="major" required/>
+					<label class="mdl-textfield__label" for="major">Major(s)</label>
+				</div><br/>
+
+				<div class="mdl-selectfield mdl-js-selectfield mdl-selectfield--floating-label">
+					<select class="mdl-selectfield__select" id="educ_level" required>
+						<option value="freshman">Freshman</option>
+						<option value="sophomore">Sophomore</option>
+						<option value="junior">Junior</option>
+						<option value="senior">Senior</option>
+						<option value="associate">Associate's</option>
+						<option value="master">Master's</option>
+						<option value="mdphd">MD/PhD</option>
+						<option value="postdoc">Post-doc</option>
+					</select>
+					<label class="mdl-selectfield__label" for="educ_level">Current level of study</label>
+				</div><br/>
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width:300px" type="submit" id="submit-button">Submit</button>
+			</form>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+	<script src="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.js"></script>
+  </body>
+</html>
