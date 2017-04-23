@@ -22,17 +22,13 @@ class User(UserMixin):
 
 @login_manager.user_loader
 def user_loader(email):
-    try:
-        with connection.cursor() as cursor:
-            rows = cursor.execute("SELECT * FROM users WHERE email={}".format(email))
-        if rows == 0:
-            return None
-
-        user = User()
-        user.id = email
-        return user
-    except:
+    with connection.cursor() as cursor:
+        rows = cursor.execute("SELECT * FROM users WHERE email='{}'".format(email))
+    if rows == 0:
         return None
+    user = User()
+    user.id = email
+    return user
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -53,14 +49,17 @@ def login():
         return 'bad login'
     user = User()
     user.id = email
-    login_user(user, remember=True)
-    return render_template('index.html')
+    login_user(user)
+    return redirect(url_for('testing'))
 
+@app.route('/protected')
+@login_required
+def testing():
+    return render_template('testing.html')
 
 @app.route('/')
-@login_required
 def home():
-    return render_template('index.html')
+    return render_template('testing.html')
 
 
 if __name__ == '__main__':
