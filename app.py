@@ -76,7 +76,17 @@ def login():
     user = User()
     user.id = email
     login_user(user)
-    return redirect(url_for('willtutor'))
+    return redirect(url_for('dashboard'))
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html');    
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('dashboard.html')
+
 
 @app.route('/willtutor', methods=['GET', 'POST'])
 def willtutor():
