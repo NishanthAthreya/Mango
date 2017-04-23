@@ -116,25 +116,14 @@ def willtutor():
     connection.commit()
     return render_template("index.html");
 
-@app.route('/availabletutors', methods=['GET', 'POST'])
+@app.route('/availabletutors', methods=['GET'])
 def available():
-    if request.method == 'GET':
-        return '''
-                <form action = 'availabletutors' method='POST'>
-                <table>
-                    <tr><td><input type='text' name='dept_id' id='dept_id' placeholder='department id'></input></td></tr>
-                    <tr><td><input type='text' name='cid' id='cid' placeholder='course id'></input></td></tr>
-                </table>
-                <input type='submit' name='submit'></input>
-                </form>
-                '''
-    cid = request.form['cid']
-    dept_id = request.form['dept_id']
+    cid = request.args.get('cid')
+    dept_id = request.args.get('dept_id')
     with connection.cursor() as cursor:
-        cursor.execute("SELECT available.tutor FROM available WHERE cid='{}'".format(cid) + " and dept_id='{}'".format(dept_id))
-        row = cursor.fetchone()
-    print(row[0])
-    return render_template('index.html')
+        cursor.execute("SELECT * FROM available WHERE cid={}".format(cid) + " and dept_id={}".format(dept_id))
+        rows = cursor.fetchall()
+    return jsonify(rows)
 
 @app.route('/connect', methods=['GET', 'POST'])
 def connect():
@@ -183,6 +172,9 @@ def testing():
 @app.route('/')
 def home():
     return render_template('index.html')
+
+
+
 
 
 if __name__ == '__main__':
