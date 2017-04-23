@@ -142,14 +142,22 @@ def connect():
     connection.commit()
     return render_template('index.html')
 
+@app.route('/departments', methods=['GET'])
+def get_departments():
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT DISTINCT dept_id FROM courses")
+    rows = cursor.fetchall()
+    depts = []
+    for i in range(len(rows)):
+        depts.append(rows[i][0])
+    return jsonify(depts);
+
 @app.route('/courses', methods=['GET'])
 def get_courses():
     dept_id = request.args.get('deptid')
-    print(dept_id)
     with connection.cursor() as cursor:
         cursor.execute("SELECT cid,name FROM courses WHERE dept_id={}".format(dept_id))
     rows = cursor.fetchall()
-    print(rows)
     return jsonify(rows);
 
 
