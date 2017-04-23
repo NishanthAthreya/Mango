@@ -1,0 +1,157 @@
+body {
+	/*position: relative;*/
+	background-color:rgb(242, 242, 242);
+	font-family: "Source Sans Pro", sans-serif;
+}
+
+
+.navbar {
+	border: 0;
+	background: transparent;
+	padding: 10px 30px 10px 0px;
+	/*HEIGHT OF NAVBAR IS NOW 70PX!!! */
+	/* animation*/
+	-webkit-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+}
+
+#navbar .navbar-link {
+	font-size: 16px;
+	/* light blue: color:rgb(147, 202, 228); */
+	color: rgb(128, 128, 128);
+	color: black;
+	padding-left: 30px;
+}
+
+#my-navbar li a:hover,
+#my-navbar li.active a {
+	background: transparent;
+	color: black;
+	font-size: 18px;
+	text-decoration: overline;
+	/* opacity:0.9;*/
+}
+
+.navbar-scroll {
+	background-color: white;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	color: rgb(128, 128, 128);
+	/* opacity */
+}
+
+#brand {
+	margin-left: 12px;
+	font-size: 20px;
+	color: black;
+}
+
+.navbar-toggle {
+	background-color: transparent !important;
+	border: none;
+}
+
+#navbar-toggled {
+	margin-right: -10px;
+}
+
+.navbar-toggle-clicked
+{
+	background-color: white;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
+	color: rgb(128, 128, 128);
+}
+
+.icon-bar {
+	background-color: black !important;
+}
+
+.navbar-default,
+div.navbar-collapse {
+	border-top: none !important;
+	box-shadow: none !important;
+}
+
+select
+{
+	margin-top:20px;
+	width:50%;
+	max-width:270px;
+}
+
+
+
+#explore-courses
+{
+	padding-top:120px;
+	background-color:rgb(242, 242, 242);
+	padding-bottom:50px;
+}
+#explore-link
+{
+	color:darkBlue;
+}
+
+#content-area-headings
+{
+	
+	
+
+}
+
+
+
+.text-vertical-center {
+	text-align: center;
+	vertical-align: middle;
+	display: table-cell;
+}
+
+.section-header {
+	margin-bottom: 50px;
+	margin-top: 50px;
+}
+
+
+
+figure {
+	max-width: 250px;
+}
+
+
+
+#content-area
+{
+}
+
+
+
+
+.tooltip-inner {
+	font-size: 15px;
+}
+
+
+/* footer */
+
+#up-arrow {
+	-webkit-transition: -webkit-transform .3s ease-in-out;
+	transition: transform .3s ease-in-out;
+	color: #888;
+}
+
+footer {
+	margin-top:50px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	/*	background-color: black;*/
+	color: #888;
+}
+
+#up-arrow:hover {
+	-webkit-transform: rotate(360deg);
+	transform: rotate(360deg);
+}
