@@ -81,7 +81,7 @@ div.navbar-collapse {
 
 #explore-courses
 {
-	padding-top:150px;
+	padding-top:70px;
 	background-color:rgb(242, 242, 242);
 	padding-bottom:50px;
 }
@@ -139,16 +139,11 @@ figure {
 
 /* footer */
 
-#up-arrow {
-	-webkit-transition: -webkit-transform .3s ease-in-out;
-	transition: transform .3s ease-in-out;
-	color: #888;
-}
 
 footer {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: black;
+	
 	color: #888;
 }
 
