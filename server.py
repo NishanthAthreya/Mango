@@ -9,6 +9,7 @@ app.secret_key = 'super secret string'
 login_manager.init_app(app)
 hackru_pass = os.environ['HACKRU_PASS']
 
+
 connection = pymysql.connect(host='mangodb.c3all2cpsbip.us-east-1.rds.amazonaws.com',
                              user='mango',
                              password=hackru_pass,
@@ -24,6 +25,8 @@ def user_loader(email):
     try:
         with connection.cursor() as cursor:
             rows = cursor.execute("SELECT * FROM users WHERE email={}".format(email))
+        if rows == 0:
+            return None
 
         user = User()
         user.id = email
@@ -50,23 +53,8 @@ def login():
         return 'bad login'
     user = User()
     user.id = email
-    login_user(user,remember=True)
+    login_user(user, remember=True)
     return render_template('index.html')
-
-
-@login_manager.request_loader
-def request_loader(request):
-    email = request.form.get('email')
-    with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM users WHERE email='{}'".format(email))
-        row = cursor.fetchone()
-    if row is None:
-        return
-    user = User()
-    user.id = email
-    user.is_authenticated = request.form['pw'] == row[6]
-
-    return user
 
 
 @app.route('/')
@@ -75,5 +63,4 @@ def home():
     return render_template('index.html')
 
 
-app.run(host='localhost',
-        port=int(os.getenv('PORT', 8080)))
+app.run(host='localhost', port=int(os.getenv('PORT', 8080)))
