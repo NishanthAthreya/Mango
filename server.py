@@ -1,10 +1,11 @@
 import os
-from flask import Flask, render_template, request, url_for, send_from_directory
+from flask import Flask, render_template, request, url_for, send_from_directory, redirect
 import pymysql.cursors
-from flask_login import LoginManager, login_required, UserMixin
+from flask_login import LoginManager, login_required, UserMixin, login_user
 
 login_manager = LoginManager()
 app = Flask(__name__)
+app.secret_key = 'super secret string'
 login_manager.init_app(app)
 hackru_pass = os.environ['HACKRU_PASS']
 
@@ -13,37 +14,51 @@ connection = pymysql.connect(host='mangodb.c3all2cpsbip.us-east-1.rds.amazonaws.
                              password=hackru_pass,
                              db='mangodb')
 
+
 class User(UserMixin):
     pass
 
+
 @login_manager.user_loader
 def user_loader(email):
-    if email not in users:
-        return
-
-    user = User()
-    user.id = email
-    return user
-
-@app.route('/')
-def home():
     try:
         with connection.cursor() as cursor:
-            # Create a new record
-            cursor.execute("INSERT INTO user (email, pwd) VALUES (%s, %s)", ('webmaster@python.org', 'very-secret'))
+            rows = cursor.execute("SELECT * FROM users WHERE email={}".format(email))
 
-        # connection is not autocommit by default. So you must commit to save
-        # your changes.
-        connection.commit()
+        user = User()
+        user.id = email
+        user.is_authenticated = True
+        return user
+    except:
+        return None
 
-        with connection.cursor() as cursor:
-            # Read a single record
-            sql = "SELECT * FROM user"
-            cursor.execute(sql)
-            result = cursor.fetchone()
-            print(result)
-    finally:
-        return render_template('index.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return '''
+               <form action='login' method='POST'>
+                <input type='text' name='email' id='email' placeholder='email'></input>
+                <input type='password' name='pw' id='pw' placeholder='password'></input>
+                <input type='submit' name='submit'></input>
+               </form>
+               '''
+    email = request.form['email']
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM users WHERE email='{}'".format(email))
+        row = cursor.fetchone()
+    if (row is None) or (request.form['pw'] != row[6]):
+        return 'bad login'
+    user = User()
+    user.id = email
+    user.is_authenticated = True
+    login_user(user,remember=True)
+    return render_template('index.html')
+
+@app.route('/')
+@login_required
+def home():
+    return render_template('index.html')
 
 
 app.run(host='0.0.0.0',
