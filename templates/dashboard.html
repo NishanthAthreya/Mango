@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../static/favicon/apple-touch-icon-57x57.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../static/favicon/apple-touch-icon-114x114.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../static/favicon/apple-touch-icon-72x72.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../static/favicon/apple-touch-icon-144x144.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="../static/favicon/apple-touch-icon-60x60.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../static/favicon/apple-touch-icon-120x120.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="../static/favicon/apple-touch-icon-76x76.png" />
+	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../static/favicon/apple-touch-icon-152x152.png" />
+	<link rel="icon" type="image/png" href="../static/favicon/favicon-196x196.png" sizes="196x196" />
+	<link rel="icon" type="image/png" href="../static/favicon/favicon-96x96.png" sizes="96x96" />
+	<link rel="icon" type="image/png" href="../static/favicon/favicon-32x32.png" sizes="32x32" />
+	<link rel="icon" type="image/png" href="../static/favicon/favicon-16x16.png" sizes="16x16" />
+	<link rel="icon" type="image/png" href="../static/favicon/favicon-128.png" sizes="128x128" />
+	<meta name="application-name" content="Mango"/>
+	<meta name="msapplication-TileColor" content="#FFFFFF" />
+	<meta name="msapplication-TileImage" content="../static/favicon/mstile-144x144.png" />
+	<meta name="msapplication-square70x70logo" content="../static/favicon/mstile-70x70.png" />
+	<meta name="msapplication-square150x150logo" content="../static/favicon/mstile-150x150.png" />
+	<meta name="msapplication-wide310x150logo" content="../static/favicon/mstile-310x150.png" />
+	<meta name="msapplication-square310x310logo" content="../static/favicon/mstile-310x310.png" />
+
+
+	<title>Mango</title>
+	<!-- Required meta tags-->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+<!--
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+-->
+
+<!-- Font Awesome -->
+<script src="https://use.fontawesome.com/22398a3a40.js"></script>
+<!--Google Font-->
+<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+
+<!--My CSS -->
+<link type="text/css" rel="stylesheet" href="../static/css/dashboard_css.css"> 
+
+<!--Google Analytics -->
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'GARBAGE', 'auto');
+ga('send', 'pageview');
+</script>
+
+<!--jQuery and JS are at the bottom of body -->
+
+</head>
+
+<!-- TODO:
+mess around with navbar
+update links in footer, team cards
+update pictures in team cards
+-->
+
+<!-- 
+!!! edit from preloader through footer. don't touch anything else
+-->
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="70">
+	
+	<nav class="navbar navbar-fixed-top navbar-inverse" id="navbar" role="navigation">
+		<!-- navbar-inverse -->
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" id="navbar-toggled" data-toggle="collapse" data-target="#my-navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" id="brand" href="#"><em><strong>Mango</strong></em></a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="my-navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" class="navbar-link">Dashboard</a></li>
+					<li><a href="#" class="navbar-link">Log out</a></li>
+				</ul>
+			</div>
+			
+		</div>
+	</nav>
+	
+	
+
+
+	<!--Explore Courses Tab -->
+	<div class="container-fluid" id="explore-courses">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				<h1><a href="#" id="explore-link"><strong>Explore Courses &gt;</strong></a></h1>
+			</div>
+		</div>
+	</div>
+	
+	<!-- content-area section-->
+	<div class="container-fluid" style="background-color:white;" id="content-area">
+		
+		<div class="row" id="content-area-headings">
+			<div class="col-xs-6" id="learning-heading"style="background-color:white;"><h3>Courses I'm getting help with</h3></div> 
+			<div class="col-xs-6" style="background-color:white;"id="teaching-heading"><h3>Courses I'm helping others with</h3></div>
+		</div>
+		
+		<div class="row" style="min-height:400px;">
+			<div class="col-xs-6" id="courses-learning"style="background-color:LightGray;">
+				
+				<!-- delete this-->
+				<p>to be inserted from template</p>
+				
+				
+			</div> 
+			<div class="col-xs-6" style="background-color:LightGray;"id="courses-teaching">
+
+				<!--delete this -->
+				<p>to be inserted from template</p>
+
+			</div>
+			
+		</div>
+	</div>
+	
+
+	
+	
+	
+
+
+
+	
+
+	
+	
+	
+
+	<!--Footer -->
+	<footer class="container-fluid text-center">
+		<a href="#myPage" title="take me up!" data-toggle="tooltip">
+			<span id="up-arrow" class="glyphicon glyphicon-chevron-up"></span>
+		</a>
+		<p>&copy; 2017 <a href="http://rohithsivakumar.github.io" target="_blank">Rohith Sivakumar</a>, <a href="#" target="_blank">Akhil Velagapudi</a>, <a href="#" target="_blank">Nishanth Athreya</a></p>
+	</footer>
+
+	<!-- JQuery -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--My JS -->
+	<script src="../static/js/dashboard_js.js"></script>
+
+
+</body>
+
+</html>
