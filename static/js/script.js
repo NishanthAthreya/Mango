@@ -49,6 +49,7 @@ $(document).ready(function() {
 	}); //end onclick
 	
 	//AJAX for "Sign In" button click
+	/*
 	$('#sign-in-button').click(function(){
 		var user = $('#email').val();
 		var pass = $('#password').val();
@@ -65,6 +66,7 @@ $(document).ready(function() {
 			}
 		});
 	});
+*/
 	
 
 
