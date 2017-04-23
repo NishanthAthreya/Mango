@@ -50,8 +50,7 @@ def create():
     line = "'" + email+ "','"+firstname + "','" + lastname + "','" + major + "','" + educ_level + "','" + phone + "','" + password + "'"
     print(educ_level)
     with connection.cursor() as cursor:
-        cursor.execute("INSERT INTO users(email, firstname, lastname, major, educ_level, phone, password)values("
-                       + "{})".format(line))
+        cursor.execute("INSERT INTO users(email, firstname, lastname, major, educ_level, phone, password)values({})".format(line))
     connection.commit()
     return render_template("index.html")
 
@@ -83,7 +82,7 @@ def dashboard():
             is_student.append([rows[i][0],rows[i][1],rows[i][2]])
             cursor.execute("SELECT name FROM courses WHERE cid='{}'".format(rows[i][2]) + " AND dept_id='{}'".format(rows[i][0]))
             is_student[i][2] = cursor.fetchone()[0]
-            cursor.execute("SELECT firstname,lastname FROM users WHERE email='{}'".format(current_user.id))
+            cursor.execute("SELECT firstname,lastname FROM users WHERE email='{}'".format(is_student[i][1]))
             full_student = cursor.fetchone()
             is_student[i][0] = full_student[0] + " " + full_student[1]
 
@@ -94,32 +93,23 @@ def dashboard():
             is_tutor.append([rows[i][0], rows[i][1], rows[i][2]])
             cursor.execute("SELECT name FROM courses WHERE cid='{}'".format(rows[i][2]) + " AND dept_id='{}'".format(rows[i][0]))
             is_tutor[i][2] = cursor.fetchone()[0]
-            cursor.execute("SELECT firstname,lastname FROM users WHERE email='{}'".format(current_user.id))
+            cursor.execute("SELECT firstname,lastname FROM users WHERE email='{}'".format(is_tutor[i][1]))
             full_tutor = cursor.fetchone()
             is_tutor[i][0] = full_tutor[0] + " " + full_tutor[1]
     return render_template('dashboard.html', learning_list=is_student, teaching_list=is_tutor)
 
 
-@app.route('/willtutor', methods=['GET', 'POST'])
+@app.route('/willtutor', methods=['GET'])
 def willtutor():
-    if request.method == 'GET':
-        return '''
-                <form action = 'available' method='POST'>
-                <table>
-                    <tr><td><input type='text' name='dept_id' id='dept_id' placeholder='department id'></input></td></tr>
-                    <tr><td><input type='text' name='cid' id='cid' placeholder='course id'></input></td></tr>
-                </table>
-                <input type='submit' name='submit'></input>
-                </form>
-                '''
     email = current_user.id
-    cid = request.form['cid']
-    dept_id = request.form['dept_id']
-    line = "'" + email + "','" + cid + "','" + dept_id + "'"
+    cid = request.args.get('cid')
+    dept_id = request.args.get('dept_id')
+    line = "'" + email + "','" + dept_id.replace("\"", "") + "','" + cid.replace("\"", "") + "'"
+    print(line)
     with connection.cursor() as cursor:
-        cursor.execute("INSERT INTO available(tutor, cid, dept_id)values({})".format(line))
+        cursor.execute("INSERT INTO available(tutor, dept_id, cid)values({})".format(line))
     connection.commit()
-    return render_template("index.html");
+    return redirect(url_for('dashboard'))
 
 @app.route('/availabletutors', methods=['GET'])
 def available():
@@ -130,28 +120,18 @@ def available():
         rows = cursor.fetchall()
     return jsonify(rows)
 
-@app.route('/connect', methods=['GET', 'POST'])
+@app.route('/connect', methods=['GET'])
 def connect():
-    if request.method == 'GET':
-        return '''
-                <form action = 'connect' method='POST'>
-                <table>
-                    <tr><td><input type='text' name='dept_id' id='dept_id' placeholder='department id'></td></tr>
-                    <tr><td><input type='text' name='cid' id='cid' placeholder='course id'></td></tr>
-                    <tr><td><input type='text' name='tutor' id='tutor' placeholder='tutor email'>
-                </table>
-                <input type='submit' name='submit'></input>
-                </form>
-                '''
     student = current_user.id
-    dept_id = request.form['dept_id']
-    cid = request.form['cid']
-    tutor = request.form['tutor']
-    line = "'" + tutor + "','" + student + "','" + cid + "','" + dept_id + "'"
+    tutor = request.args.get('tutor')
+    cid = request.args.get('cid')
+    dept_id = request.args.get('dept_id')
+    line = "'" + tutor.replace("\"", "") + "','" + student + "','" + cid.replace("\"", "") + "','" + dept_id.replace("\"", "") + "'"
+    print(line)
     with connection.cursor() as cursor:
         cursor.execute("INSERT INTO tutoruser(tutor, student, cid, dept_id)values({})".format(line))
     connection.commit()
-    return render_template('index.html')
+    return redirect(url_for('dashboard'))
 
 @app.route('/departments', methods=['GET'])
 def get_departments():
