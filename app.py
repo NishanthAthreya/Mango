@@ -52,7 +52,6 @@ def create():
 
 @app.route('/login', methods=['POST'])
 def login():
-    
     email = request.form['email']
     with connection.cursor() as cursor:
         cursor.execute("SELECT * FROM users WHERE email='{}'".format(email))
@@ -71,7 +70,29 @@ def signup():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('dashboard.html')
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT dept_id,tutor,cid FROM tutoruser WHERE student='{}'".format(current_user.id))
+        rows = cursor.fetchall()
+        is_student = []
+        for i in range(len(rows)):
+            is_student.append([rows[i][0],rows[i][1],rows[i][2]])
+            cursor.execute("SELECT name FROM courses WHERE cid='{}'".format(rows[i][2]) + " AND dept_id='{}'".format(rows[i][0]))
+            is_student[i][2] = cursor.fetchone()[0]
+            cursor.execute("SELECT firstname,lastname FROM users WHERE email='{}'".format(current_user.id))
+            full_student = cursor.fetchone()
+            is_student[i][0] = full_student[0] + " " + full_student[1]
+
+        cursor.execute("SELECT dept_id,student,cid FROM tutoruser WHERE tutor='{}'".format(current_user.id))
+        rows = cursor.fetchall()
+        is_tutor = []
+        for i in range(len(rows)):
+            is_tutor.append([rows[i][0], rows[i][1], rows[i][2]])
+            cursor.execute("SELECT name FROM courses WHERE cid='{}'".format(rows[i][2]) + " AND dept_id='{}'".format(rows[i][0]))
+            is_tutor[i][2] = cursor.fetchone()[0]
+            cursor.execute("SELECT firstname,lastname FROM users WHERE email='{}'".format(current_user.id))
+            full_tutor = cursor.fetchone()
+            is_tutor[i][0] = full_tutor[0] + " " + full_tutor[1]
+    return render_template('dashboard.html', learning_list=is_student, teaching_list=is_tutor)
 
 
 @app.route('/willtutor', methods=['GET', 'POST'])
