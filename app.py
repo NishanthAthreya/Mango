@@ -32,32 +32,18 @@ def user_loader(email):
     user.id = email
     return user
 
-@app.route("/create", methods=['GET', 'POST'])
+@app.route("/create", methods=['POST'])
 def create():
-    if request.method == 'GET':
-        return '''
-            <form action = 'create' method = 'POST'>
-                <table>
-                    <tr><td><input type='text' name='email' id='email' placeholder='email'></input></td></tr>
-                    <tr><td><input type='text' name='firstname' id='firstname' placeholder='first name'></input></td></td>
-                    <tr><td><input type='text' name='lastname' id='lastname' placeholder='last-name'></input></td></tr>
-                    <tr><td><input type='text' name='major' id='major' placeholder='major(i.e-332)'></input></td></tr>
-                    <tr><td><input type='text' name='educ_level' id='educ_level' placeholder='education level'></input></td></tr>
-                    <tr><td><input type='text' name='phone' id='phone' placeholder='phone number'></input></td></tr>
-                    <tr><td><input type='text' name='password' id='password' placeholder='password'></input></td></tr>
-                </table>
-                <input type='submit' name='submit'></input>
-            </form>
-            '''
     email = request.form['email']
-    firstname = request.form['firstname']
-    lastname = request.form['lastname']
+    print(email)
+    firstname = request.form['first-name']
+    lastname = request.form['last-name']
     major = request.form['major']
     educ_level = request.form['educ_level']
-    phone = request.form['phone']
+    phone = request.form['phone-number']
     password = request.form['password']
     line = "'" + email+ "','"+firstname + "','" + lastname + "','" + major + "','" + educ_level + "','" + phone + "','" + password + "'"
-    print(line)
+    print(educ_level)
     with connection.cursor() as cursor:
         cursor.execute("INSERT INTO users(email, firstname, lastname, major, educ_level, phone, password)values("
                        + "{})".format(line))
@@ -76,7 +62,17 @@ def login():
     user = User()
     user.id = email
     login_user(user)
-    return redirect(url_for('willtutor'))
+    return redirect(url_for('dashboard'))
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html');    
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('dashboard.html')
+
 
 @app.route('/willtutor', methods=['GET', 'POST'])
 def willtutor():
