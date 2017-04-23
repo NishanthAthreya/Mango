@@ -33,6 +33,7 @@ def user_loader(email):
     return user
 
 @app.route('/explore')
+@login_required
 def explore():
     return render_template('explore.html');
 
