@@ -147,7 +147,7 @@ def get_courses():
     dept_id = request.args.get('deptid')
     print(dept_id)
     with connection.cursor() as cursor:
-        cursor.execute("SELECT * FROM courses WHERE dept_id='{}'".format(dept_id))
+        cursor.execute("SELECT cid,name FROM courses WHERE dept_id={}".format(dept_id))
     rows = cursor.fetchall()
     print(rows)
     return jsonify(rows);
