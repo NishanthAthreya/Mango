@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, url_for, send_from_directory, redirect, json, jsonify
 import pymysql.cursors
-from flask_login import LoginManager, login_required, UserMixin, login_user, current_user
+from flask_login import LoginManager, login_required, UserMixin, login_user, current_user, logout_user
 
 login_manager = LoginManager()
 app = Flask(__name__)
@@ -52,7 +52,7 @@ def create():
     with connection.cursor() as cursor:
         cursor.execute("INSERT INTO users(email, firstname, lastname, major, educ_level, phone, password)values({})".format(line))
     connection.commit()
-    return render_template("index.html")
+    return redirect(url_for('home'))
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -148,19 +148,15 @@ def get_courses():
     rows = cursor.fetchall()
     return jsonify(rows);
 
-
-@app.route('/protected')
-@login_required
-def testing():
-    return render_template('testing.html')
-
 @app.route('/')
 def home():
     return render_template('index.html')
 
-
-
-
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
