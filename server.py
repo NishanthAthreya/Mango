@@ -27,7 +27,6 @@ def user_loader(email):
 
         user = User()
         user.id = email
-        user.is_authenticated = True
         return user
     except:
         return None
@@ -51,9 +50,24 @@ def login():
         return 'bad login'
     user = User()
     user.id = email
-    user.is_authenticated = True
     login_user(user,remember=True)
     return render_template('index.html')
+
+
+@login_manager.request_loader
+def request_loader(request):
+    email = request.form.get('email')
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM users WHERE email='{}'".format(email))
+        row = cursor.fetchone()
+    if row is None:
+        return
+    user = User()
+    user.id = email
+    user.is_authenticated = request.form['pw'] == row[6]
+
+    return user
+
 
 @app.route('/')
 @login_required
@@ -61,5 +75,5 @@ def home():
     return render_template('index.html')
 
 
-app.run(host='0.0.0.0',
-        port=int(os.getenv('PORT', 5000)))
+app.run(host='localhost',
+        port=int(os.getenv('PORT', 8080)))
