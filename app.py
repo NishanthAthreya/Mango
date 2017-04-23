@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, url_for, send_from_directory, redirect, json
+from flask import Flask, render_template, request, url_for, send_from_directory, redirect, json, jsonify
 import pymysql.cursors
 from flask_login import LoginManager, login_required, UserMixin, login_user, current_user
 
@@ -146,6 +146,12 @@ def connect():
 def get_courses():
     dept_id = request.args.get('deptid')
     print(dept_id)
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM courses WHERE dept_id='{}'".format(dept_id))
+    rows = cursor.fetchall()
+    print(rows)
+    return jsonify(rows);
+
 
 @app.route('/protected')
 @login_required
