@@ -162,12 +162,9 @@ def connect():
 @app.route('/departments', methods=['GET'])
 def get_departments():
     with connection.cursor() as cursor:
-        cursor.execute("SELECT DISTINCT dept_id FROM courses")
+        cursor.execute("SELECT DISTINCT dept_id,dept_name FROM courses")
     rows = cursor.fetchall()
-    depts = []
-    for i in range(len(rows)):
-        depts.append(rows[i][0])
-    return jsonify(depts);
+    return jsonify(rows);
 
 @app.route('/courses', methods=['GET'])
 def get_courses():
