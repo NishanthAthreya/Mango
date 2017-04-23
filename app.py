@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, url_for, send_from_directory, redirect, json
 import pymysql.cursors
-from flask_login import LoginManager, login_required, UserMixin, login_user
+from flask_login import LoginManager, login_required, UserMixin, login_user, current_user
 
 login_manager = LoginManager()
 app = Flask(__name__)
@@ -32,6 +32,37 @@ def user_loader(email):
     user.id = email
     return user
 
+@app.route("/create", methods=['GET', 'POST'])
+def create():
+    if request.method == 'GET':
+        return '''
+            <form action = 'create' method = 'POST'>
+                <table>
+                    <tr><td><input type='text' name='email' id='email' placeholder='email'></input></td></tr>
+                    <tr><td><input type='text' name='firstname' id='firstname' placeholder='first name'></input></td></td>
+                    <tr><td><input type='text' name='lastname' id='lastname' placeholder='last-name'></input></td></tr>
+                    <tr><td><input type='text' name='major' id='major' placeholder='major(i.e-332)'></input></td></tr>
+                    <tr><td><input type='text' name='educ_level' id='educ_level' placeholder='education level'></input></td></tr>
+                    <tr><td><input type='text' name='phone' id='phone' placeholder='phone number'></input></td></tr>
+                    <tr><td><input type='text' name='password' id='password' placeholder='password'></input></td></tr>
+                </table>
+                <input type='submit' name='submit'></input>
+            </form>
+            '''
+    email = request.form['email']
+    firstname = request.form['firstname']
+    lastname = request.form['lastname']
+    major = request.form['major']
+    educ_level = request.form['educ_level']
+    phone = request.form['phone']
+    password = request.form['password']
+    line = "'" + email+ "','"+firstname + "','" + lastname + "','" + major + "','" + educ_level + "','" + phone + "','" + password + "'"
+    print(line)
+    with connection.cursor() as cursor:
+        cursor.execute("INSERT INTO users(email, firstname, lastname, major, educ_level, phone, password)values("
+                       + "{})".format(line))
+    connection.commit()
+    return render_template("index.html")
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -45,7 +76,71 @@ def login():
     user = User()
     user.id = email
     login_user(user)
-    return redirect(url_for('testing'))
+    return redirect(url_for('willtutor'))
+
+@app.route('/willtutor', methods=['GET', 'POST'])
+def willtutor():
+    if request.method == 'GET':
+        return '''
+                <form action = 'available' method='POST'>
+                <table>
+                    <tr><td><input type='text' name='dept_id' id='dept_id' placeholder='department id'></input></td></tr>
+                    <tr><td><input type='text' name='cid' id='cid' placeholder='course id'></input></td></tr>
+                </table>
+                <input type='submit' name='submit'></input>
+                </form>
+                '''
+    email = current_user.id
+    cid = request.form['cid']
+    dept_id = request.form['dept_id']
+    line = "'" + email + "','" + cid + "','" + dept_id + "'"
+    with connection.cursor() as cursor:
+        cursor.execute("INSERT INTO available(tutor, cid, dept_id)values({})".format(line))
+    connection.commit()
+    return render_template("index.html");
+
+@app.route('/availabletutors', methods=['GET', 'POST'])
+def available():
+    if request.method == 'GET':
+        return '''
+                <form action = 'availabletutors' method='POST'>
+                <table>
+                    <tr><td><input type='text' name='dept_id' id='dept_id' placeholder='department id'></input></td></tr>
+                    <tr><td><input type='text' name='cid' id='cid' placeholder='course id'></input></td></tr>
+                </table>
+                <input type='submit' name='submit'></input>
+                </form>
+                '''
+    cid = request.form['cid']
+    dept_id = request.form['dept_id']
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT available.tutor FROM available WHERE cid='{}'".format(cid) + " and dept_id='{}'".format(dept_id))
+        row = cursor.fetchone()
+    print(row[0])
+    return render_template('index.html')
+
+@app.route('/connect', methods=['GET', 'POST'])
+def connect():
+    if request.method == 'GET':
+        return '''
+                <form action = 'connect' method='POST'>
+                <table>
+                    <tr><td><input type='text' name='dept_id' id='dept_id' placeholder='department id'></td></tr>
+                    <tr><td><input type='text' name='cid' id='cid' placeholder='course id'></td></tr>
+                    <tr><td><input type='text' name='tutor' id='tutor' placeholder='tutor email'>
+                </table>
+                <input type='submit' name='submit'></input>
+                </form>
+                '''
+    student = current_user.id
+    dept_id = request.form['dept_id']
+    cid = request.form['cid']
+    tutor = request.form['tutor']
+    line = "'" + tutor + "','" + student + "','" + cid + "','" + dept_id + "'"
+    with connection.cursor() as cursor:
+        cursor.execute("INSERT INTO tutoruser(tutor, student, cid, dept_id)values({})".format(line))
+    connection.commit()
+    return render_template('index.html')
 
 @app.route('/protected')
 @login_required
