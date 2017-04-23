@@ -1,209 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<link rel="apple-touch-icon-precomposed" sizes="57x57" href="../static/favicon/apple-touch-icon-57x57.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../static/favicon/apple-touch-icon-114x114.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../static/favicon/apple-touch-icon-72x72.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../static/favicon/apple-touch-icon-144x144.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="../static/favicon/apple-touch-icon-60x60.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="../static/favicon/apple-touch-icon-120x120.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="../static/favicon/apple-touch-icon-76x76.png" />
-	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="../static/favicon/apple-touch-icon-152x152.png" />
-	<link rel="icon" type="image/png" href="../static/favicon/favicon-196x196.png" sizes="196x196" />
-	<link rel="icon" type="image/png" href="../static/favicon/favicon-96x96.png" sizes="96x96" />
-	<link rel="icon" type="image/png" href="../static/favicon/favicon-32x32.png" sizes="32x32" />
-	<link rel="icon" type="image/png" href="../static/favicon/favicon-16x16.png" sizes="16x16" />
-	<link rel="icon" type="image/png" href="../static/favicon/favicon-128.png" sizes="128x128" />
-	<meta name="application-name" content="Mango"/>
-	<meta name="msapplication-TileColor" content="#FFFFFF" />
-	<meta name="msapplication-TileImage" content="../static/favicon/mstile-144x144.png" />
-	<meta name="msapplication-square70x70logo" content="../static/favicon/mstile-70x70.png" />
-	<meta name="msapplication-square150x150logo" content="../static/favicon/mstile-150x150.png" />
-	<meta name="msapplication-wide310x150logo" content="../static/favicon/mstile-310x150.png" />
-	<meta name="msapplication-square310x310logo" content="../static/favicon/mstile-310x310.png" />
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
 
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
 
-	<title>Mango</title>
-	<!-- Required meta tags-->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-<!--
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
--->
-
-<!-- Font Awesome -->
-<script src="https://use.fontawesome.com/22398a3a40.js"></script>
-<!--Google Font-->
-<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
-
-<!--My CSS -->
-<link type="text/css" rel="stylesheet" href="../static/css/stylesheet.css"> 
-
-<!--Google Analytics -->
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'GARBAGE', 'auto');
-ga('send', 'pageview');
-</script>
-
-<!--jQuery and JS are at the bottom of body -->
-
-</head>
-
-<!-- TODO:
-add favicon
-make custom 404 page
--->
-
-<!-- 
-!!! edit from preloader through footer. don't touch anything else
--->
-
-
-<body class="loading" id="myPage" data-spy="scroll" data-target=".navbar" data-offset="70">
-	<!--
-		<div class="preloader">
-		<div class="status">
-			<div class="loading-text">loading...</div>
-		</div>
-	</div>
--->
-
-
-
-
-<!-- Intro header section-->
-<header class="container-fluid" id="intro">
-	<div class=" col-12 col-sm-6 col-md-7" id="intro-text-area">
-		<div class="text-vertical-center" id="intro-text">
-			<p id="name">Mango</p>
-			<p>Give or get help. / Help or be helped.</p>
-			<p>If you're having trouble with a class at Rutgers, Mango can help you find tutors.</p>
-			<p>If you're a tutor, Mango can help you find students to tutor.</p>
-			<p>Completely for free. Sign up today!</p>
-		</div>
-	</div>
-
-		<!--do we need this?
-		<div class="clearfix visible-xs"></div>-->
-
-		<div class=" col-12 col-sm-6 col-md-5" id="login-area">
-
-			<form class="text-vertical-center"id="login-form" role="form" action="login" method="POST">
-				<input type="email" class="form-control" id="email" placeholder="Email" style="font-size:20px;" name="email" required autofocus>
-				<input type="password" class="form-control" id="password" placeholder="Password" style="font-size:20px;" name="password" required>
-
-				<button type="submit" class="btn btn-default" style="font-size:17px;" id="sign-in-button">Sign In</button>
-				<!-- could move this out of the form, it changes length of input boxes -->
-				<a href="/signup" style="margin-left:20px; font-size:17px;">Sign Up</a>
+    <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="../static/css/signup_styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+      <div class="demo-ribbon"></div>
+      <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid">
+		  <div class="mdl-cell"></div>
+          <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell">
+            <h3 align="center">Sign In</h3>
+            <form role="form" action="login" method="POST">
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" name="email" type="email" id="email" autofocus required/>
+					<label class="mdl-textfield__label" for="email">Email</label>
+				</div><br/>
+				<div class="mdl-textfield mdl-js-textfield">
+					<input class="mdl-textfield__input" name="password" type="password" id="password" required/>
+					<label class="mdl-textfield__label" for="password">Password</label>
+				</div><br/><br/>
 				
+
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="width:100%" type="submit" id="submit-button">Log In</button>
+				<br/><br/>
 			</form>
-
-			
-
-		</div>
-	</header>
-
-	<!-- Team Section-->
-	<div id="team" class="container-fluid">
-		<h1 class="text-center section-header">the team</h1>
-		<!-- grid of team -->
-		<div class="row ">
-			<div class="col-sm-6 col-md-4 team-item-container">
-				<div class="team-item" style=" position:relative;">
-					<!--adding position:relative to this div allows the span to fill it up perfectly -->
-					<a href="http://rohithsivakumar.github.io" target="_blank">
-						<span class="team-card-span"></span>
-					</a>
-					<!--
-					<img class="img-responsive img-rounded team-image center-block" src="#" alt="Rohith" border="16">
-				-->
-					<div class="team-text">
-						<h2>Rohith Sivakumar</h2>
-						<!--
-						<p>stuff stuff</p>
-						<p>stuff stuff</p>
-					-->
-					</div>
-				</div>
+			<div style="text-align:center">
+				<a href="/signup" style="font-size:14px;">Sign Up</a>
 			</div>
-
-			<div class=" col-sm-6 col-md-4 team-item-container">
-				<div class="team-item" style=" position:relative;">
-					<a href="https://github.com/nis123" target="_blank">
-						<span class="team-card-span"></span>
-					</a>
-					<!--
-					<img class="img-responsive img-rounded  team-image center-block" src="#" alt="Nishanth">
--->
-					<div class="team-text">
-						<h2>Nishanth Athreya</h2>
-						<!--
-						<p>stuff stuff</p>
-						<p>stuff stuff</p>
-					-->
-					</div>
-				</div>
-			</div>
-
-			<div class=" col-sm-6 col-md-4 team-item-container ">
-				<div class="team-item" style=" position:relative;">
-					<a href="https://github.com/akhilles" target="_blank">
-						<span class="team-card-span"></span>
-					</a>
-					<!--
-					<img class="img-responsive img-rounded  team-image center-block" src="#" alt="Akhil">
--->
-					<div class="team-text">
-						<h2>Akhil Velagapudi</h2>
-						<!--
-						<p>stuff stuff</p>
-						<p>stuff stuff</p>
-					-->
-					</div>
-				</div>
-			</div>
-
-			<div class="clearfix visible-lg"></div>
-			<div class="clearfix visible-md"></div>
-			<!--these fix the issue of team cards not wrapping  properly when the viewport is resized -->
-
-		</div>
-		<!-- end row-->
-	</div>
-	<!-- end team section -->
-
-	<!--Footer -->
-	<footer class="container-fluid text-center">
-		<a href="#myPage" title="take me up!" data-toggle="tooltip">
-			<span id="up-arrow" class="glyphicon glyphicon-chevron-up"></span>
-		</a>
-		<p>&copy; 2017 <a href="http://rohithsivakumar.github.io" target="_blank">Rohith Sivakumar</a>, <a href="https://github.com/akhilles" target="_blank">Akhil Velagapudi</a>, <a href="https://github.com/nis123" target="_blank">Nishanth Athreya</a></p>
-	</footer>
-
-
-
-
-
-	<!-- JQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!--My JS -->
-	<script src="../static/js/script.js"></script>
-
-</body>
-
-
-
-
+          </div>
+		  <div class="mdl-cell"></div>
+        </div>
+      </main>
+    </div>
+    <script src="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.min.js"></script>
+	<script src="https://cdn.rawgit.com/kybarg/mdl-selectfield/mdl-menu-implementation/mdl-selectfield.min.js"></script>
+  </body>
 </html>

@@ -23,6 +23,7 @@
 .demo-content {
   border-radius: 2px;
   padding: 80px 56px;
+  height: 800px;
 }
 
 .demo-layout.is-small-screen .demo-content {
