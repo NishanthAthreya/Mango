@@ -32,6 +32,10 @@ def user_loader(email):
     user.id = email
     return user
 
+@app.route('/explore')
+def explore():
+    return render_template('explore.html');
+
 @app.route("/create", methods=['POST'])
 def create():
     email = request.form['email']
